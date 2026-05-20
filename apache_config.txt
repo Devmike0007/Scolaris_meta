@@ -1,0 +1,63 @@
+# Configuration Apache nécessaire pour Scolaris Meta VR
+
+## Étapes pour configurer XAMPP :
+
+### 1. Activer mod_rewrite
+Ouvrez `C:\xampp\apache\conf\httpd.conf` et décommentez cette ligne :
+```
+LoadModule rewrite_module modules/mod_rewrite.so
+```
+
+### 2. Configurer AllowOverride
+Dans le même fichier `httpd.conf`, trouvez la section pour le dossier htdocs :
+```
+<Directory "C:/xampp/htdocs">
+    Options Indexes FollowSymLinks Includes ExecCGI
+    AllowOverride All
+    Require all granted
+</Directory>
+```
+
+Assurez-vous que `AllowOverride All` est présent.
+
+### 3. Redémarrer Apache
+- Ouvrez le panneau de contrôle XAMPP
+- Arrêtez Apache
+- Redémarrez Apache
+
+### 4. Vérifier la configuration
+Accédez à : http://localhost/Scolaris_vr/public/test.php
+
+### 5. Si toujours erreur 403, essayez :
+1. Désactiver temporairement le fichier .htaccess :
+   - Renommez `.htaccess` en `.htaccess.bak`
+   
+2. Vérifier les permissions Windows :
+   - Clic droit sur le dossier `Scolaris_vr`
+   - Propriétés > Sécurité
+   - Assurez-vous que `Everyone` ou `Users` a les permissions de lecture/exécution
+
+3. Vérifier le fichier de logs Apache :
+   - `C:\xampp\apache\logs\error.log`
+
+### 6. Solution alternative : Virtual Host
+Créez un virtual host dans `C:\xampp\apache\conf\extra\httpd-vhosts.conf` :
+
+```
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/Scolaris_vr/public"
+    ServerName scolaris.local
+    <Directory "C:/xampp/htdocs/Scolaris_vr/public">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+
+Ajoutez dans `C:\Windows\System32\drivers\etc\hosts` :
+```
+127.0.0.1 scolaris.local
+```
+
+Accédez à : http://scolaris.local

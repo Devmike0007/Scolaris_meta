@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scolaris Meta VR - Scène Immersive</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        .vr-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .vr-header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-vr {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .btn-vr:hover {
+            background: #45a049;
+        }
+        
+        .btn-secondary {
+            background: #666;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .btn-secondary:hover {
+            background: #555;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            z-index: 1000;
+        }
+        
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .instructions {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="vr-header">
+        <h1><i class="fas fa-vr-cardboard"></i> Scolaris Meta VR - Mode Immersif</h1>
+        <div class="controls">
+            <a href="../public/index.php" class="btn-secondary">Retour à l'accueil</a>
+            <button onclick="enterVR()" class="btn-vr">Entrer en VR</button>
+        </div>
+    </div>
+    
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <p>Chargement de la scène VR...</p>
+    </div>
+    
+    <a-scene id="vr-scene" vr-mode-ui="enabled: false">
+        <!-- Skybox avec l'image générée -->
+        <a-sky id="vr-sky" src="" color="#4CC3D9"></a-sky>
+        
+        <!-- Contrôles de navigation -->
+        <a-entity id="camera" camera="fov: 80" look-controls wasd-controls position="0 1.6 0">
+            <a-cursor></a-cursor>
+        </a-entity>
+        
+        <!-- Éléments décoratifs optionnels -->
+        <a-entity light="type: ambient; color: #888"></a-entity>
+        <a-entity light="type: directional; color: #FFF; intensity: 0.5" position="-1 2 1"></a-entity>
+    </a-scene>
+    
+    <div class="instructions">
+        <p>Utilisez les touches ZQSD pour vous déplacer • Déplacez la souris pour regarder autour • Cliquez pour interagir</p>
+    </div>
+    
+    <script>
+        // Récupérer l'image depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageUrl = urlParams.get('image') || 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200';
+        
+        // Attendre que A-Frame soit chargé
+        document.addEventListener('DOMContentLoaded', function() {
+            const scene = document.querySelector('a-scene');
+            const sky = document.querySelector('#vr-sky');
+            const loading = document.getElementById('loading');
+            
+            // Configurer le sky avec l'image
+            sky.setAttribute('src', imageUrl);
+            
+            // Cacher le loader une fois la scène chargée
+            scene.addEventListener('loaded', function() {
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 1000);
+            });
+        });
+        
+        // Fonction pour entrer en mode VR
+        function enterVR() {
+            const scene = document.querySelector('a-scene');
+            if (scene.hasAttribute('vr-mode-ui')) {
+                scene.setAttribute('vr-mode-ui', 'enabled: true');
+            }
+            
+            // Activer le mode VR
+            if (scene.enterVR) {
+                scene.enterVR();
+            }
+        }
+        
+        // Fonction pour quitter le mode VR
+        function exitVR() {
+            const scene = document.querySelector('a-scene');
+            if (scene.exitVR) {
+                scene.exitVR();
+            }
+        }
+        
+        // Gestion des erreurs de chargement d'image
+        document.querySelector('#vr-sky').addEventListener('error', function() {
+            this.setAttribute('src', 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200');
+            console.log('Image non chargée, utilisation de l\'image par défaut');
+        });
+    </script>
+    
+    <!-- Font Awesome pour les icônes -->
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</body>
+</html>
