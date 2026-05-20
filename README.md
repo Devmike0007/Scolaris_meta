@@ -2,6 +2,32 @@
 
 Une application web qui permet à un utilisateur de saisir un prompt (texte) et d'afficher une image immersive dans un environnement VR (via A-Frame).
 
+## 📘 Description du projet
+
+Dans le secteur scolaire en République Démocratique du Congo, il existe un problème majeur de visualisation des cours. La majorité des élèves ne comprennent pas bien certaines notions, car ils ne peuvent pas voir concrètement ce qu’ils apprennent.
+
+C’est dans ce contexte que Scolaris Meta intervient.
+
+Notre système propose une solution basée sur la réalité virtuelle (VR) et l’intelligence artificielle (IA). Grâce à cette technologie, l’enseignant peut saisir un prompt décrivant un concept ou une leçon, et l’IA va automatiquement :
+
+- rechercher ou générer une image ou une scène 3D
+- transformer le contenu pédagogique en expérience visuelle immersive
+- afficher le résultat dans un casque de réalité virtuelle
+
+Ainsi, les élèves peuvent voir, comprendre et interagir avec les notions enseignées, ce qui améliore fortement la compréhension et la mémorisation.
+
+### 🚀 Objectif du projet
+
+Améliorer la qualité de l’éducation en rendant l’apprentissage plus visuel, interactif et immersif grâce à la VR et à l’IA.
+
+### 💡 Exemple
+
+Un professeur de biologie peut entrer un prompt comme :
+
+> "Le système respiratoire humain"
+
+Et le système va générer une représentation visuelle 3D affichée dans un casque VR.
+
 ## 🎯 Objectif
 
 Créer une expérience immersive où les utilisateurs peuvent :
