@@ -50,7 +50,7 @@ function view_generator($image = null, $prompt = '') {
                 <h3>Image générée</h3>
                 <img src="<?php echo htmlspecialchars($image); ?>" alt="Image générée">
                 <div class="actions">
-                    <a href="../../app/vr/vr.php?image=<?php echo urlencode($image); ?>" target="_blank">Voir en VR</a>
+                    <a href="/app/vr/vr.php?image=<?php echo urlencode($image); ?>" target="_blank">Voir en VR</a>
                     <a href="">Nouvelle recherche</a>
                 </div>
             </div>

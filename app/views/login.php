@@ -49,22 +49,26 @@
             <header>
                 <nav>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">What we serve</a></li>
-                        <li><a href="#">Who we are</a></li>
+                        
                         <button>DEMO</button>
                     </ul>
                 </nav>
             </header>
             <div class="centre">
                 <div class="titre">
-                    <h2>Veuillez vous connecter</h2>
+                    <h2>Bienvenue sur Scolaris VR</h2>
                     <div class="bar"></div>
                 </div>
                 <p>
-                    Bienvenue sur notre plateforme. Ici, nous valorisons l’excellence, l'engagement et la transparence. Chaque service que nous proposons vise à améliorer votre expérience utilisateur. Notre équipe travaille jour et nuit pour vous offrir des solutions fiables, accessibles et sécurisées. Que vous soyez un parent, un élève ou un partenaire, vous trouverez chez nous écoute, accompagnement et innovation. Nous croyons en un avenir où la technologie soutient l’éducation et facilite la communication. Rejoignez-nous pour découvrir tout ce que nous avons à offrir.
+                    Bienvenue sur Scolaris VR, une plateforme éducative innovante qui exploite la réalité virtuelle pour transformer l'apprentissage. Notre objectif est d'offrir aux élèves, enseignants et établissements scolaires une expérience immersive, interactive et enrichissante. Grâce à la technologie VR, les apprenants peuvent explorer des environnements virtuels, visualiser des concepts complexes et développer leurs compétences de manière pratique et engageante. Scolaris VR place l'innovation au cœur de l'éducation afin de rendre l'apprentissage plus accessible, captivant et efficace pour tous.
                 </p>
-                <button>En savoir plus</button>
+                <div class="bntc">
+                    <button>Inscrirer</button>
+                        <button>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+
+                </div>
             </div>
         </div>
         <div class="cote">
