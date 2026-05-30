@@ -9,9 +9,11 @@ $action = $_GET['action'] ?? 'login';
 $controller = new AuthController();
 
 if ($action === 'login') {
-    view_login();
+    redirect('../views/login.php');
+
 } elseif ($action === 'process' || $_SERVER['REQUEST_METHOD'] === 'POST') {
     $controller->login();
+    
 } elseif ($action === 'logout') {
     $controller->logout();
 }
