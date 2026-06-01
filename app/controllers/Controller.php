@@ -23,6 +23,48 @@ class AuthController {
         session_destroy();
         redirect('auth.php?action=login');
     }
+    public function register() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        
+        $nom = $_POST['nom'] ?? '';
+        $prenom = $_POST['prenom'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $confirm = $_POST['confirm_password'] ?? '';
+        $type = $_POST['type'] ?? 'user';
+
+        // Vérification mot de passe
+        if ($password !== $confirm) {
+            redirect('auth.php?action=register&error=password');
+            return;
+        }
+
+        // Hash du mot de passe (important 🔐)
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+        // Vérifier si admin
+        $is_admin = 0;
+        if ($type === 'admin') {
+            $code_admin = $_POST['code_admin'] ?? '';
+
+            if ($code_admin !== "123456") { // ton code secret
+                redirect('auth.php?action=register&error=admin');
+                return;
+            }
+
+            $is_admin = 1;
+        }
+
+        // Enregistrer utilisateur
+        $result = UserModel::register($nom, $prenom, $email, $passwordHash, $is_admin);
+
+        if ($result) {
+            redirect('auth.php?action=login&success=1');
+        } else {
+            redirect('auth.php?action=register&error=1');
+        }
+    }
+}
 }
 
 class ImageController {

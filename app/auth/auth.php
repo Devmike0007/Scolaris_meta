@@ -17,4 +17,13 @@ if ($action === 'login') {
 } elseif ($action === 'logout') {
     $controller->logout();
 }
+elseif ($action === 'register') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $controller->register();
+    } else {
+        redirect('../views/sign_ups.php');
+    }
+} else {
+    redirect('../views/login.php');
+}
 ?>

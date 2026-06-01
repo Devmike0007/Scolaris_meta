@@ -204,13 +204,13 @@ ul button{
     gap: 30px;
     padding: 0 0 0 50px;
 }
-.centre h2{
+.centre .slide h2{
     position: relative;
     color: #7700b4;
     
 
 }
-.centre h2:before{
+.centre .slide h2:before{
     position: absolute;
     left: 0px;
     top: 35px;
@@ -219,17 +219,49 @@ ul button{
     content: "";
     background-color: #7700b4;
 }
-.centre p{
+.centre .slide p{
     text-align: justify;
     color:#686868ce;
 }
+.slide {
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: absolute;
+}
+
+.slide.active {
+    opacity: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.centre .bntc{
+    display: flex;
+    gap: 20px;
+}
 .centre button{
-    width: 100px;
+    width: 120px;
     color: #fff;
     padding: 6px;
     background-color: #7700b4;
     border-radius: 50px;
     border: transparent;
+}
+
+.centre .suivant{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.centre .suivant img{
+    height: 15px;
+}
+.centre .suivant p{
+    color: #fff;
+    font-size: 14px;
 }
 .cote{
     
@@ -249,8 +281,6 @@ ul button{
 .cote .o1{
     height: 15px;
     width: 15px;
-}
-.cote .o1:hover{
     border: 2px solid #7700b4;
     font-size: 80px;
    
