@@ -16,7 +16,7 @@
     <section>
         <div class="partie1">
             <div class="logo">
-                <img src="<?php echo IMG.'inscri.png';?>" alt="">
+                <img src="<?php echo IMG.'logo.png';?>" alt="">
             </div>
             <div class="center">
                 <div class="titre">
@@ -39,34 +39,37 @@
         <div class="partie2">
 
             <div class="centre">
-                <form method="POST" action="../auth/auth.php?action=register">
-                    
+                <form method="POST" action="../auth/auth.php?action=register" enctype="multipart/form-data">
                     <div class="InpC">
                         <div class="InpG">
                             <input type="text" name="nom" placeholder="Nom" required>
                             <div class="ligne"></div>
                         </div>
+
                         <div class="InpG">
                             <input type="text" name="prenom" placeholder="Prénom" required>
                             <div class="ligne"></div>
                         </div>
-
                     </div>
+
                     <div class="InpC">
                         <div class="InpG">
                             <input type="email" name="email" placeholder="Email" required>
                             <div class="ligne"></div>
                         </div>
+
                         <div class="InpG">
                             <input type="password" name="password" placeholder="Mot de passe" required>
                             <div class="ligne"></div>
                         </div>
                     </div>
+
                     <div class="InpC">
                         <div class="InpG">
                             <input type="password" name="confirm_password" placeholder="Confirmer mot de passe" required>
                             <div class="ligne"></div>
                         </div>
+
                         <div class="InpG">
                             <select name="type" id="type">
                                 <option value="user">Utilisateur</option>
@@ -76,19 +79,29 @@
                         </div>
                     </div>
 
-
-                    <!-- Type de compte -->
-
-
-                    <!-- Champ admin -->
-                    <div id="adminCode" style="display:none;">
+                    <!-- PHOTO -->
+                    <div class="InpC">
                         <div class="InpG">
-                            <input type="text" name="code_admin" placeholder="Code admin">
+                            <div class="upload-box">
+                                <input type="file" name="photo" id="photo" accept="image/*">
+                                <span id="file-name" ><label for="photo" id="file-name" class="upload-btn"> 📷 Aucun fichier choisi</label></span>
+                            </div>
                             <div class="ligne"></div>
+                        </div>
+                        <div class="InpG">
+                              <!-- CODE ADMIN -->
+                            <div id="adminCode" style="display:none; margin-top: -13px;">
+                                <div class="InpG">
+                                    <input type="text" name="code_admin" placeholder="Code admin">
+                                    <div class="ligne"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <button type="submit">S'inscrire</button>
+
+
+                    <button type="submit" >S'inscrire</button>
 
                 </form>
             </div>
@@ -109,9 +122,10 @@
             adminField.style.display = "none";
         }
     });
-        document.getElementById("btnInscrire").addEventListener("click", function() {
-        window.location.href = "confirm.php";
+        document.getElementById("photo").addEventListener("change", function () {
+    let fileName = this.files[0] ? this.files[0].name : "Aucun fichier choisi";
+    document.getElementById("file-name").textContent = fileName;
     });
-</script>
+    </script>
 </body>
 </html>

@@ -44,7 +44,9 @@
                 <i class="fab fa-google"></i>
             </div>
         </div>
-
+        <div class="vrimage">
+            <img src="<?php echo IMG.'vr.png';?>" alt="">
+        </div>
 
         <div class="partie2">
             <header>

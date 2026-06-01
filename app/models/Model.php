@@ -24,6 +24,34 @@ class ImageModel {
 }
 
 class UserModel {
+    private static function getUsersFilePath() {
+        return dirname(__DIR__) . '/data/users.json';
+    }
+
+    private static function loadUsers() {
+        $file = self::getUsersFilePath();
+
+        if (!file_exists($file)) {
+            return [];
+        }
+
+        $content = file_get_contents($file);
+        $users = json_decode($content, true);
+
+        return is_array($users) ? $users : [];
+    }
+
+    private static function saveUsers(array $users) {
+        $file = self::getUsersFilePath();
+        $dir = dirname($file);
+
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        return file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT)) !== false;
+    }
+
     public static function login($email, $password) {
         if ($email === ADMIN_EMAIL && $password === ADMIN_PASSWORD) {
             return [
@@ -32,7 +60,51 @@ class UserModel {
                 'is_admin' => true
             ];
         }
+
+        $users = self::loadUsers();
+
+        foreach ($users as $user) {
+            if (isset($user['email']) && strtolower($user['email']) === strtolower($email)) {
+                if (isset($user['password']) && password_verify($password, $user['password'])) {
+                    return [
+                        'id' => $user['id'],
+                        'name' => trim(($user['nom'] ?? '') . ' ' . ($user['prenom'] ?? '')) ?: $user['email'],
+                        'is_admin' => !empty($user['is_admin'])
+                    ];
+                }
+                break;
+            }
+        }
+
         return null;
+    }
+
+    public static function register($nom, $prenom, $email, $passwordHash, $is_admin = false) {
+        $users = self::loadUsers();
+
+        foreach ($users as $user) {
+            if (isset($user['email']) && strtolower($user['email']) === strtolower($email)) {
+                return false;
+            }
+        }
+
+        $nextId = 1;
+        if (!empty($users)) {
+            $ids = array_column($users, 'id');
+            $nextId = max($ids) + 1;
+        }
+
+        $users[] = [
+            'id' => $nextId,
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'email' => $email,
+            'password' => $passwordHash,
+            'is_admin' => !empty($is_admin)
+        ];
+
+        return self::saveUsers($users);
     }
 }
 ?>
+

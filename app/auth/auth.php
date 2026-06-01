@@ -11,7 +11,7 @@ $controller = new AuthController();
 if ($action === 'login') {
     redirect('../views/login.php');
 
-} elseif ($action === 'process' || $_SERVER['REQUEST_METHOD'] === 'POST') {
+} elseif ($action === 'process') {
     $controller->login();
     
 } elseif ($action === 'logout') {
@@ -23,7 +23,5 @@ elseif ($action === 'register') {
     } else {
         redirect('../views/sign_ups.php');
     }
-} else {
-    redirect('../views/login.php');
 }
 ?>

@@ -8,7 +8,12 @@ body{
     width: 100%;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     padding: 20px;
-    background-color: #c899ff;
+    background-color: #191219;
+    background-image: url(../img/fond.png);
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+    
 }
 section{
     margin: auto;
@@ -18,11 +23,15 @@ section{
     display: flex;
     gap: 10px;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.94);
     box-shadow: 0 0 10px rgb(37, 37, 37);
 }
 section .partie1{
-    background-color: #7800b4c3;
+
+    background-image: url(../img/portrait-young-african-american-man-with-vr-glasses.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     height: 100%;
     width: 50%;
     border-radius: 10px 0 0 10px;
@@ -37,8 +46,8 @@ section .partie1 form{
     gap: 20px;
 }
 section .partie1 .logo{
-    height: 120px;
-    width: 120px;
+    height: 100px;
+    width: 100px;
 }
 section .partie1 .logo img{
     width: 100%;
@@ -287,4 +296,13 @@ ul button{
 }
 ::selection{
     color: black;
+}
+.vrimage{
+position: absolute;
+right: 10px;  
+top: 51%;
+
+}
+.vrimage img{
+    height: 350px;
 }

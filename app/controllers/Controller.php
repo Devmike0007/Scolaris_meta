@@ -11,7 +11,7 @@ class AuthController {
             if ($user) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
-                $_SESSION['is_admin'] = $user['is_admin'];
+                $_SESSION['is_admin'] = !empty($user['is_admin']);
                 redirect('../../public/index.php');
             } else {
                 redirect('auth.php?action=login&error=1');
@@ -35,8 +35,9 @@ class AuthController {
 
         // Vérification mot de passe
         if ($password !== $confirm) {
-            redirect('auth.php?action=register&error=password');
-            return;
+            echo "<script>alert('Les mots de passe ne correspondent pas.');</script>";
+            redirect('../views/sign_ups.php');
+            exit();
         }
 
         // Hash du mot de passe (important 🔐)
